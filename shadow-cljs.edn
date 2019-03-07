@@ -1,11 +1,12 @@
 ;; shadow-cljs configuration
 {:source-paths
- ["src/dev"
-  "src/main"
-  "src/test"]
+ ["src" "src/*"]
 
  :dependencies
  []
 
  :builds
- {}}
+ {:app {:target :node-script
+        :output-to "target/main.js"
+        :main main/main!
+        :devtools {:after-load main/reload! }}}}
