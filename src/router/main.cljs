@@ -1,5 +1,6 @@
 (ns router.main
-  (:require ["express" :refer (Router)]))
+  (:require ["express" :refer (Router)]
+            [controller.user :refer (get-user)]))
 
 
 (defn index-route [req res]
@@ -7,4 +8,4 @@
 
 (def router
   (let [r (Router)]
-    (. r (get "/" index-route))))
+    (. r (get "/:id?" get-user))))

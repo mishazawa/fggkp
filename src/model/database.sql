@@ -1,0 +1,16 @@
+DROP SCHEMA ffgkp;
+CREATE DATABASE ffgkp;
+
+USE ffgkp;
+
+
+CREATE TABLE IF NOT EXISTS `users` (
+  user_id     VARCHAR(255) NOT NULL,
+  username    VARCHAR(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+
+  PRIMARY KEY (user_id)
+) ENGINE=INNODB;
+
+ALTER DATABASE ffgkp
+DEFAULT CHARACTER SET utf8mb4
+DEFAULT COLLATE utf8mb4_unicode_ci;

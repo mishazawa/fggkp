@@ -13,7 +13,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^6.2.0",
     "express": "^4.16.4",
+    "log-timestamp": "^0.3.0",
+    "mysql": "^2.16.0",
     "shadow-cljs": "^2.8.14"
   },
   "nodemonConfig": {
