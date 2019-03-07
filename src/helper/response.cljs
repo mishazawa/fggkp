@@ -1,4 +1,4 @@
-(ns help.response)
+(ns helper.response)
 
 (defn send-200-json [response data]
   (-> response
