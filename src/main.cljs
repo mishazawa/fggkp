@@ -2,11 +2,18 @@
   (:require ["log-timestamp"]
             ["dotenv" :rename { config dotenv }]
             ["express" :as express]
+            ["body-parser" :as body-parser]
             [controller.database :as db]
             [router.main :refer (router)]
             [mw.main :refer (cljs-session hide-powered-by)]
             ))
 
+(defn shutdown-server []
+  (db/close))
+
+(.on js/process "SIGINT" shutdown-server)
+(.on js/process "SIGTERM" shutdown-server)
+(.on js/process "exit" shutdown-server)
 
 (defn main! []
   (dotenv)
@@ -23,13 +30,14 @@
 
     (. app (use hide-powered-by))
     (. app (use cljs-session))
+    (. app (use (.json body-parser)))
     (. app (use router))
 
-    (. app (listen 3000 (fn []
-      (println (map #(.toUpperCase %) ["app" "listen" "3000" (.. js/process -env -TEST)])))))))
+    (. app (listen (.. js/process -env -PORT) (fn []
+      (println (map #(.toUpperCase %) ["app" "listen" (.. js/process -env -PORT)])))))))
 
 (defn reload! []
-  (db/close)
+  (shutdown-server)
   (println "Code updated. Reload"))
 
 
